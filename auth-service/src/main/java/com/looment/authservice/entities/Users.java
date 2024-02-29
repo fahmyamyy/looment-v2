@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
@@ -18,10 +19,11 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@DynamicUpdate
 public class Users {
     @Id
     @GeneratedValue(generator = "uuid2")
-    @Column(name = "id", columnDefinition = "uuid")
+    @Column(name = "id", columnDefinition = "uuid", updatable = false)
     private UUID id;
 
     @Column(nullable = false)
@@ -36,7 +38,7 @@ public class Users {
     @Column(nullable = false)
     private String password;
 
-    private String profileUrl;
+    private String profileUrl = "defaultUrlLater";
 
     private String bio;
 
@@ -53,6 +55,9 @@ public class Users {
 
     @Column(name = "locked_at")
     private LocalDateTime lockedAt;
+
+    @Column(name = "is_private", nullable = false)
+    private Boolean isPrivate = Boolean.FALSE;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false, name = "created_at")

@@ -32,9 +32,6 @@ public class UsersInfo {
     @Column(name = "total_posts", nullable = false)
     private Integer totalPosts = 0;
 
-    @Column(name = "total_answer", nullable = false)
-    private Integer totalAnswer = 0;
-
     @CreationTimestamp
     @Column(nullable = false, updatable = false, name = "created_at")
     private LocalDateTime createdAt;
